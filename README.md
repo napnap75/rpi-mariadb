@@ -7,3 +7,6 @@ Copy of the official MariaDB image for the Raspberry Pi
 - The changes from this source are :
   * base image from debian:jessie to resin/rpi-raspbian:jessie
   * APT repository from percona to the official raspbian ones
+
+# Usage
+See https://hub.docker.com/_/mariadb/
