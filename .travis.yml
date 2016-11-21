@@ -1,0 +1,15 @@
+language: bash
+services: docker
+sudo: required
+
+install:
+  - docker run --rm --privileged multiarch/qemu-user-static:register
+
+script:
+  - docker build -t napnap75/rpi-mariadb:latest .
+  - docker run --rm napnap75/rpi-mariadb:latest bash -c env && uname -a
+  - docker images
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push napnap75/rpi-mariadb:latest
