@@ -11,6 +11,15 @@ RUN apk add pwgen mariadb mariadb-client \
   && mv /tmp/my.cnf /etc/mysql/my.cnf \
   && cat /etc/mysql/my.cnf
 
+# Use the volume to store mysql data outside of the image
 VOLUME /var/lib/mysql
+
+# Expose mysql default port
 EXPOSE 3306
+
+# Add the specific entry script to create the database if necessary
+ADD docker-entrypoint-pre.sh /usr/sbin/docker-entrypoint-pre.sh
+RUN chmod +x /usr/sbin/docker-entrypoint-pre.sh
+
+# Default command to run
 CMD ["mysqld"]
